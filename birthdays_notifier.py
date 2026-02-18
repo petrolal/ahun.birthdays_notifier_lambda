@@ -29,7 +29,7 @@ SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
 
 def get_dataframe():
-    creds_dict = json.loads(GOOGLE_CREDENTIALS_JSON)
+    creds_dict = json.loads(base64.b64decode(GOOGLE_CREDENTIALS_JSON).decode("utf-8"))
 
     credentials = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
 
