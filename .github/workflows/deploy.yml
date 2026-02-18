@@ -31,13 +31,13 @@ jobs:
       - name: Create zip
         run: |
           cd build
-          zip -r lambda.zip .
+          zip -r birthday_notifier_lambda.zip .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: lambda-package
-          path: build/lambda.zip
+          path: build/birthdays_notifier_lambda.zip
 
   deploy:
     name: Deploy to S3
@@ -59,4 +59,4 @@ jobs:
 
       - name: Upload to S3
         run: |
-          aws s3 cp lambda.zip s3://${{ secrets.S3_BUCKET }}/${{ secrets.S3_KEY }}
+          aws s3 cp birthday_notifier_lambda.zip s3://${{ secrets.S3_BUCKET }}/${{ secrets.S3_KEY }}
