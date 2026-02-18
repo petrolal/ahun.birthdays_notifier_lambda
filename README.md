@@ -4,36 +4,28 @@ Lambda function to send monthly Ahun contribuitors birthdays to telegram.
 
 ## Usage
 
-### Create S3 bucket to store the lambda code
+1. Create a Telegram bot and get the bot token.
+2. Create a Telegram chat and get the chat ID.
+3. Set the following environment variables in your Lambda function:
 
-```bash
-aws cloudformation create-stack \
-  --stack-name casa-ahun-birthday-bucket-stack \
-  --template-body file://casa-ahun-bucket.yaml \
-  --parameters ParameterKey=BucketName,ParameterValue=casa-ahun-assets
-```
+- `TELEGRAM_BOT_TOKEN`: Your Telegram bot token.
+- `TELEGRAM_CHAT_ID`: Your Telegram chat ID.
 
-### Create lambda function
+4. Deploy the Lambda function and set it to trigger on a schedule (e.g., monthly).
 
-```bash
-aws cloudformation create-stack \
-  --stack-name ahun-birthday-stack \
-  --template-body file://template.yaml \
-  --capabilities CAPABILITY_NAMED_IAM \
-  --parameters \
-    ParameterKey=S3Bucket,ParameterValue=casa-ahun-assets \
-    ParameterKey=S3Key,ParameterValue=ahun-send-monthly-birthdays-to-telegram.zip \
-    ParameterKey=SpreadsheetId,ParameterValue='SPREAD_SHEET_ID' \
-    ParameterKey=TelegramToken,ParameterValue='TELEGRAM_TOKEN' \
-    ParameterKey=ChatId,ParameterValue=2046779343 \
-    ParameterKey=GoogleCredentialsJson,ParameterValue='GOOGLE_CREDENTIALS_JSON_ONE_LINE' \
-```
+## License
 
-### Test the lambda function
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-```bash
-  aws lambda invoke \
-    --function-name ahun-send-monthly-birthdays-to-telegram \
-    --payload '{}' \
-    response.json
-```
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+
+## Acknowledgments
+
+- Thanks to the Ahun community for their contributions and support.
+- Inspired by the need to celebrate our contributors' birthdays and foster a sense of community.
+
+## Contact
+
+If you have any questions or suggestions, please feel free to contact us at [Lucas Petrola](tel:+55619999387022) or email us at [lhpetrola@gmail.com](mailto: lhpetrola@gmail.com).
